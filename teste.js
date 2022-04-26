@@ -1,11 +1,3 @@
-const employeeObject = () => {
-    const worker = {
-        nome: "Arthur Pereira",
-        email: "arthureletrica@outlook.com"
-    }
-    return worker
-}
-
 
 const newEmployees = () => {
     const employees = {
@@ -16,4 +8,13 @@ const newEmployees = () => {
     return employees;
     };
 
-    console.log(employeeObject());
+    const nomeEmail = (nome) => {
+        return {
+            nomeCompleto: nome,
+            email: `${nome.replace(' ', '_').toLowerCase()}@trybe.com`
+        }
+    }
+
+    // nomeEmail('Arthur Pereira')
+
+    console.log(nomeEmail('Arthur'));
