@@ -10,7 +10,7 @@ const getUser = (callback) => {
       lastName: "Ivanovich",
       nationality: "Russian",
     };
-    console.log(user);
+    // console.log(user);
     return callback(user)
   }, delay());
 };

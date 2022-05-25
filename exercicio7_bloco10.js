@@ -1,37 +1,29 @@
-const despesas = [
-    {
-      gym: 99,
-    },
-    {
-      ifood: 200,
-    },
-    {
-      phone: 60,
-    },
-    {
-      internet: 100,
-    },
-  ];
-  
-  const renda = 1000;
+const countryName = ({ name }) => console.log(`Returned country is ${name}`);
+const countryCurrency = ({ name, currency }) => console.log(`${name}'s currency is the ${currency}`);
 
-  const despesaMensal = (renda, despesas, callback) => {
-    //   callback é a função somaDespesas
+const delay = (maxMilliseconds = 5000) => Math.floor(Math.random() * maxMilliseconds);
 
-    const despesaTotal = callback(despesas);
-    // aqui callback (somaDespesas) recebe o parâmetro despesas que nada mais é do que o objeto contigo na variável "despesas"
-    const saldoFinal = renda - despesaTotal;
-  
-    console.log(`Balanço do mês:
-      Recebido: R$${renda},00
-      Gasto: R$${despesaTotal},00
-      Saldo: R$${saldoFinal},00 `);
-  };
+const printErrorMessage = (error) => console.log(`Error getting country: ${error}`);
 
-  const somaDespesas = (despesas) => {
-    const custoItem = despesas.map((item) => Object.values(item));
-    const despesaTotal = custoItem.reduce((acc, curr) => acc += curr[0], 0);
-    return despesaTotal;
-  };
-  
-  despesaMensal(renda, despesas, somaDespesas);
+const getCountry = (onSuccess, callback) => {
+  setTimeout(() => {
+    const didOperationSucceed = Math.random() >= 0.5;
+    if(didOperationSucceed) {
+      const country = {
+        name: "Brazil",
+        hdi: 0.759,
+        currency: "Real",
+      };
+      onSuccess(country);
+    } else {
+      const errorMessage = "Country could not be found";
+      callback (errorMessage)
+    }
+  }, delay());
+};
+
+// Deve imprimir "Returned country is Brazil" no sucesso ou "Error getting country: Country could not be found" em caso de falha
+getCountry(countryName, printErrorMessage);
+
+// Deve imprimir "Brazil's currency is the Real" no sucesso, ou "Error getting country: Country could not be found" em caso de falha
+getCountry(countryCurrency, printErrorMessage);
